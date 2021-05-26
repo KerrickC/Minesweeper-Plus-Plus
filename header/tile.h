@@ -19,8 +19,8 @@ private:
 	bool top_tile_activated;
 
 	vector<Tile*> adjacent;
-	
-	
+
+
 public:
 	sf::Sprite tile;
 	sf::Sprite over_tile;
@@ -32,7 +32,7 @@ public:
 		this->image = "";
 		this->isGameTile = false;
 		this->isBomb = false;
-	
+
 	}
 
 	Tile(string image, bool isGameTile, bool isPressed) {
@@ -56,7 +56,7 @@ public:
 		this->isPressed = isPressed;
 		this->x_coor = x_coor;
 		this->y_coor = y_coor;
-	} 
+	}
 
 	int calculateAdjacentMines();
 

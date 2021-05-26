@@ -6,9 +6,9 @@
 void Board::reset() {
     this->game_lost = false;
     this->game_won = false;
-	for (int i = 0; i < this->boardvec.size(); i++) {
-		this->boardvec[i]->setTexture("tile_hidden");
-	}
+    for (int i = 0; i < this->boardvec.size(); i++) {
+        this->boardvec[i]->setTexture("tile_hidden");
+    }
 }
 
 sf::RenderWindow& Board::initialize(int numRows, int numCols) {
@@ -24,189 +24,189 @@ sf::RenderWindow& Board::initialize(int numRows, int numCols) {
     }
     this->boardvec.clear(); //clear the board vector
 
-     if (this->test_1) { //test 1 pressed
-         ifstream infile;
-         infile.open("./boards/testboard1.brd");
+    if (this->test_1) { //test 1 pressed
+        ifstream infile;
+        infile.open("./boards/testboard1.brd");
 
-         //get rows and cols
-         int cols = 0;
-         int rows = 0;
-
-
-         //put all 0s and 1s into an array (1-D like board)
-         string line;
-         string bit;
-         vector<vector<char>> content;
-         while (getline(infile, line)) {
-             cols = line.length();
-             rows++;
-             vector<char> temp;
-
-             //temp.push_back(line);
-             for (int i = 0; i <= line.length(); i++) {
-                 temp.push_back(line[i]);
-             }
-
-             content.push_back(temp);
-         }
-
-            this->cols = rows;
-         this->rows = cols;
-
-         for (int i = 0; i < rows; i++) {
-             for (int j = 0; j < cols; j++) {
-                 bool is_mine = false;
-                 if (content[i][j] == '0') {
-                     is_mine = false;
-                     //cout << "no mine" << endl;
-                 }
-                 else if (content[i][j] == '1') {
-                     is_mine = true;
-                     // cout << "mine" << endl;
-                 }
-                 //cout << content[i][j];
-                 Tile* sqr = new Tile("tile_hidden", true, false, is_mine, false, j, i);
-                 sqr->tile.setPosition(j * 32, i * 32);
-                 sqr->over_tile.setPosition(j * 32, i * 32);
-                 sqr->top_tile.setPosition(j * 32, i * 32);
-                 this->boardvec.push_back(sqr);
-             }
-         }
-     }
-     else if (this->test_2) {
-         ifstream infile;
-         infile.open("./boards/testboard2.brd");
-
-         //get rows and cols
-         int cols = 0;
-         int rows = 0;
+        //get rows and cols
+        int cols = 0;
+        int rows = 0;
 
 
-         //put all 0s and 1s into an array (1-D like board)
-         string line;
-         string bit;
-         vector<vector<char>> content;
-         while (getline(infile, line)) {
-             cols = line.length();
-             rows++;
-             vector<char> temp;
+        //put all 0s and 1s into an array (1-D like board)
+        string line;
+        string bit;
+        vector<vector<char>> content;
+        while (getline(infile, line)) {
+            cols = line.length();
+            rows++;
+            vector<char> temp;
 
-             //temp.push_back(line);
-             for (int i = 0; i <= line.length(); i++) {
-                 temp.push_back(line[i]);
-             }
+            //temp.push_back(line);
+            for (int i = 0; i <= line.length(); i++) {
+                temp.push_back(line[i]);
+            }
 
-             content.push_back(temp);
-         }
+            content.push_back(temp);
+        }
 
-            this->cols = rows;
-            this->rows = cols;
+        this->cols = rows;
+        this->rows = cols;
 
-         for (int i = 0; i < rows; i++) {
-             for (int j = 0; j < cols; j++) {
-                 bool is_mine = false;
-                 if (content[i][j] == '0') {
-                     is_mine = false;
-                     //cout << "no mine" << endl;
-                 }
-                 else if (content[i][j] == '1') {
-                     is_mine = true;
-                     // cout << "mine" << endl;
-                 }
-                 //cout << content[i][j];
-                 Tile* sqr = new Tile("tile_hidden", true, false, is_mine, false, j, i);
-                 sqr->tile.setPosition(j * 32, i * 32);
-                 sqr->over_tile.setPosition(j * 32, i * 32);
-                 sqr->top_tile.setPosition(j * 32, i * 32);
-                 this->boardvec.push_back(sqr);
-             }
-         }
-     }
-     else if (this->test_3) {
-         ifstream infile;
-         infile.open("./boards/testboard3.brd");
-
-         //get rows and cols
-         int cols = 0;
-         int rows = 0;
-
-         //put all 0s and 1s into an array (1-D like board)
-         string line;
-         string bit;
-         vector<vector<char>> content;
-         while (getline(infile, line)) {
-             cols = line.length();
-             rows++;
-             vector<char> temp;
-
-             //temp.push_back(line);
-             for (int i = 0; i <= line.length(); i++) {
-                 temp.push_back(line[i]);
-             }
-
-             content.push_back(temp);
-         }
-    
-         this->cols = rows;
-         this->rows = cols;
-
-
-         for (int i = 0; i < rows; i++) {
-             for (int j = 0; j < cols; j++) {
-                 bool is_mine = false;
-                 if (content[i][j] == '0') {
-                     is_mine = false;
-                     //cout << "no mine" << endl;
-                 }
-                 else if (content[i][j] == '1') {
-                     is_mine = true;
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                bool is_mine = false;
+                if (content[i][j] == '0') {
+                    is_mine = false;
+                    //cout << "no mine" << endl;
+                }
+                else if (content[i][j] == '1') {
+                    is_mine = true;
                     // cout << "mine" << endl;
-                 }
-               // cout << content[i][j];
-                 Tile* sqr = new Tile("tile_hidden", true, false, is_mine, false, j, i);
-                 sqr->tile.setPosition(j * 32, i * 32);
-                 sqr->over_tile.setPosition(j * 32, i * 32);
-                 sqr->top_tile.setPosition(j * 32, i * 32);
-                 this->boardvec.push_back(sqr);
-             }
-         }
-     }
-     else {
-         for (int i = 0; i < this->rows; i++) {
-             for (int j = 0; j < this->cols ; j++) {
-                 Tile* sqr = new Tile("tile_hidden", true, false, false, false, i, j);
-                 sqr->tile.setPosition(i * 32, j * 32);
-                 sqr->over_tile.setPosition(i * 32, j * 32);
-                 sqr->top_tile.setPosition(i * 32, j * 32);
-                 this->boardvec.push_back(sqr);
-             }
-         }
-         int num_mines = this->mines;
-         int mines_set = 0;
+                }
+                //cout << content[i][j];
+                Tile* sqr = new Tile("tile_hidden", true, false, is_mine, false, j, i);
+                sqr->tile.setPosition(j * 32, i * 32);
+                sqr->over_tile.setPosition(j * 32, i * 32);
+                sqr->top_tile.setPosition(j * 32, i * 32);
+                this->boardvec.push_back(sqr);
+            }
+        }
+    }
+    else if (this->test_2) {
+        ifstream infile;
+        infile.open("./boards/testboard2.brd");
 
-         
+        //get rows and cols
+        int cols = 0;
+        int rows = 0;
+
+
+        //put all 0s and 1s into an array (1-D like board)
+        string line;
+        string bit;
+        vector<vector<char>> content;
+        while (getline(infile, line)) {
+            cols = line.length();
+            rows++;
+            vector<char> temp;
+
+            //temp.push_back(line);
+            for (int i = 0; i <= line.length(); i++) {
+                temp.push_back(line[i]);
+            }
+
+            content.push_back(temp);
+        }
+
+        this->cols = rows;
+        this->rows = cols;
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                bool is_mine = false;
+                if (content[i][j] == '0') {
+                    is_mine = false;
+                    //cout << "no mine" << endl;
+                }
+                else if (content[i][j] == '1') {
+                    is_mine = true;
+                    // cout << "mine" << endl;
+                }
+                //cout << content[i][j];
+                Tile* sqr = new Tile("tile_hidden", true, false, is_mine, false, j, i);
+                sqr->tile.setPosition(j * 32, i * 32);
+                sqr->over_tile.setPosition(j * 32, i * 32);
+                sqr->top_tile.setPosition(j * 32, i * 32);
+                this->boardvec.push_back(sqr);
+            }
+        }
+    }
+    else if (this->test_3) {
+        ifstream infile;
+        infile.open("./boards/testboard3.brd");
+
+        //get rows and cols
+        int cols = 0;
+        int rows = 0;
+
+        //put all 0s and 1s into an array (1-D like board)
+        string line;
+        string bit;
+        vector<vector<char>> content;
+        while (getline(infile, line)) {
+            cols = line.length();
+            rows++;
+            vector<char> temp;
+
+            //temp.push_back(line);
+            for (int i = 0; i <= line.length(); i++) {
+                temp.push_back(line[i]);
+            }
+
+            content.push_back(temp);
+        }
+
+        this->cols = rows;
+        this->rows = cols;
+
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                bool is_mine = false;
+                if (content[i][j] == '0') {
+                    is_mine = false;
+                    //cout << "no mine" << endl;
+                }
+                else if (content[i][j] == '1') {
+                    is_mine = true;
+                    // cout << "mine" << endl;
+                }
+                // cout << content[i][j];
+                Tile* sqr = new Tile("tile_hidden", true, false, is_mine, false, j, i);
+                sqr->tile.setPosition(j * 32, i * 32);
+                sqr->over_tile.setPosition(j * 32, i * 32);
+                sqr->top_tile.setPosition(j * 32, i * 32);
+                this->boardvec.push_back(sqr);
+            }
+        }
+    }
+    else {
+        for (int i = 0; i < this->rows; i++) {
+            for (int j = 0; j < this->cols; j++) {
+                Tile* sqr = new Tile("tile_hidden", true, false, false, false, i, j);
+                sqr->tile.setPosition(i * 32, j * 32);
+                sqr->over_tile.setPosition(i * 32, j * 32);
+                sqr->top_tile.setPosition(i * 32, j * 32);
+                this->boardvec.push_back(sqr);
+            }
+        }
+        int num_mines = this->mines;
+        int mines_set = 0;
+
+
         this->cols = this->orig_rows;
-         this->rows = this->orig_cols;
-         
-         
+        this->rows = this->orig_cols;
 
-         for (int i = num_mines; i > 0; i--) {
-             int rand = Random::Int(0, this->boardvec.size() - 11);
-             if (this->boardvec[rand]->getisBomb()) {
-                 i++;
-             }
-             else {
-                 this->boardvec[rand]->setisBomb(true);
-                 mines_set++;
-             }
-             
-         }
 
-         this->mines = mines_set;
-     }
-     Tile* sign = new Tile("digits", false, false);
-     sign->tile.setPosition(0, window.getSize().y - 90);
-     this->boardvec.push_back(sign);
+
+        for (int i = num_mines; i > 0; i--) {
+            int rand = Random::Int(0, this->boardvec.size() - 11);
+            if (this->boardvec[rand]->getisBomb()) {
+                i++;
+            }
+            else {
+                this->boardvec[rand]->setisBomb(true);
+                mines_set++;
+            }
+
+        }
+
+        this->mines = mines_set;
+    }
+    Tile* sign = new Tile("digits", false, false);
+    sign->tile.setPosition(0, window.getSize().y - 90);
+    this->boardvec.push_back(sign);
 
     Tile* dig_1 = new Tile("digits", false, false);
     dig_1->tile.setPosition(32, window.getSize().y - 90);
@@ -220,10 +220,10 @@ sf::RenderWindow& Board::initialize(int numRows, int numCols) {
     dig_3->tile.setPosition(96, window.getSize().y - 90);
     this->boardvec.push_back(dig_3);
 
-    
+
 
     Tile* face_button = new Tile("face_happy", false, false);
-    face_button->tile.setPosition((window.getSize().x / 2) - ((face_button->tile.getTexture()->getSize().x)*2), window.getSize().y - 90);
+    face_button->tile.setPosition((window.getSize().x / 2) - ((face_button->tile.getTexture()->getSize().x) * 2), window.getSize().y - 90);
     this->boardvec.push_back(face_button);
 
     Tile* debug_button = new Tile("debug", false, debug_state);
@@ -258,13 +258,13 @@ sf::RenderWindow& Board::initialize(int numRows, int numCols) {
             int x_diff = cur_x - comp_x;
             int y_diff = cur_y - comp_y;
 
-           
-            if ((x_diff == -1 && y_diff == 0) || (x_diff == -1 && y_diff == 1) || (x_diff == -1 && y_diff == -1) || (x_diff == 0 && y_diff == 1) || (x_diff == 0 && y_diff ==  -1) || (x_diff == 0 && y_diff == 0) || (x_diff == 1 && y_diff == -1) || (x_diff == 1 && y_diff == 0) || (x_diff == 1 && y_diff == 1)) {
+
+            if ((x_diff == -1 && y_diff == 0) || (x_diff == -1 && y_diff == 1) || (x_diff == -1 && y_diff == -1) || (x_diff == 0 && y_diff == 1) || (x_diff == 0 && y_diff == -1) || (x_diff == 0 && y_diff == 0) || (x_diff == 1 && y_diff == -1) || (x_diff == 1 && y_diff == 0) || (x_diff == 1 && y_diff == 1)) {
                 if (adjacent.size() > 8) {
                     break;
                 }
                 adjacent.push_back(comp);
-                
+
             }
 
         }
@@ -277,7 +277,7 @@ sf::RenderWindow& Board::initialize(int numRows, int numCols) {
     this->test_3 = false;
 
 
-   // auto ret_win = &window;
+    // auto ret_win = &window;
     return window;
 }
 
@@ -296,16 +296,16 @@ bool Board::checkWin() {
         }
     }
 
-  //cout << "Non mines pressed: " << non_mines_pressed << " " << "Non mine tiles remaining: " << non_mine_tiles << endl;
+    //cout << "Non mines pressed: " << non_mines_pressed << " " << "Non mine tiles remaining: " << non_mine_tiles << endl;
 
-    
-  if (non_mines_pressed >= non_mine_tiles) {
-      this->game_won = true;
-      return true;
-  }
-  else {
-      return false;
-  }
+
+    if (non_mines_pressed >= non_mine_tiles) {
+        this->game_won = true;
+        return true;
+    }
+    else {
+        return false;
+    }
 }
 
 bool Board::checkLose() {
@@ -375,7 +375,7 @@ void Board::UpdateScore(sf::RenderWindow& window, Board board) {
     sf::IntRect zero(0, 0, 32, 32);
     sf::IntRect none(0, 0, 0, 0);
 
-  
+
     if (score < 100) {
         if (score < 0) {
             score = score * -1;
@@ -395,7 +395,7 @@ void Board::UpdateScore(sf::RenderWindow& window, Board board) {
             digit_three_sprite.setTextureRect(sf::IntRect(third_dig * 21, 0, 21, 30));
         }
         else {
-  
+
             sign_sprite.setTextureRect(none);
 
             int first_dig = score % 10;
@@ -403,7 +403,7 @@ void Board::UpdateScore(sf::RenderWindow& window, Board board) {
 
             int sec_temp = score / 10;
             int sec_dig = sec_temp % 10;
-           
+
             digit_two_sprite.setTextureRect(sf::IntRect(sec_dig * 21, 0, 21, 30));
 
             int third_temp = score / 100;
@@ -428,7 +428,7 @@ void Board::UpdateScore(sf::RenderWindow& window, Board board) {
         digit_three_sprite.setTextureRect(sf::IntRect(third_dig * 21, 0, 21, 30));
 
     }
-   
+
 
     digit_one->tile = digit_one_sprite;
 

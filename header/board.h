@@ -14,7 +14,7 @@ private:
 	bool test_2;
 	bool test_3;
 public:
-	sf::RenderWindow &window;
+	sf::RenderWindow& window;
 	int rows;
 	int cols;
 	int mines;
@@ -65,7 +65,7 @@ public:
 	void test1Pressed();
 
 	void test2Pressed();
-	
+
 	void test3Pressed();
 
 	void UpdateScore(sf::RenderWindow& window, Board board);

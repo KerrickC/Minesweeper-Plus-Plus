@@ -10,8 +10,8 @@
 int main()
 {
     void RerenderBoard(Board & board, sf::RenderWindow & window);
-    void CheckIfTilePressed(Board& board, sf::RenderWindow & window,string side, int numRows, int numCols);
-    void UpdateScore(sf::RenderWindow& window, Board& board);
+    void CheckIfTilePressed(Board & board, sf::RenderWindow & window, string side, int numRows, int numCols);
+    void UpdateScore(sf::RenderWindow & window, Board & board);
 
     //CONFIG
     ifstream infile;
@@ -32,7 +32,7 @@ int main()
 
     int numTiles = conf_cols * conf_rows;
 
-    auto &window = board.initialize(conf_cols, conf_rows); //initialize board
+    auto& window = board.initialize(conf_cols, conf_rows); //initialize board
 
     while (window.isOpen())
     {
@@ -46,11 +46,11 @@ int main()
             else if (event.type == sf::Event::MouseButtonPressed) {
                 if (event.mouseButton.button == sf::Mouse::Left) {
 
-                   CheckIfTilePressed(board, window, "left", board.rows, board.cols);
-                   
+                    CheckIfTilePressed(board, window, "left", board.rows, board.cols);
+
                 }
                 else if (event.mouseButton.button == sf::Mouse::Right) {
-                   CheckIfTilePressed(board, window,"right", board.rows, board.cols);
+                    CheckIfTilePressed(board, window, "right", board.rows, board.cols);
 
                 }
             }
@@ -72,7 +72,7 @@ int main()
 void  CheckIfTilePressed(Board& board, sf::RenderWindow& window, string side, int numRows, int numCols) {
     auto mouse_pos = sf::Mouse::getPosition(window);
     auto translated_pos = window.mapPixelToCoords(mouse_pos);
-    
+
     for (int i = 0; i < board.boardvec.size(); i++) {
 
         sf::Sprite curSprite = board.boardvec[i]->tile;
@@ -83,7 +83,7 @@ void  CheckIfTilePressed(Board& board, sf::RenderWindow& window, string side, in
             cout << "Tile " << i << " pressed." << endl;
             if (side == "left") {
                 if (curTile->getisGameTile() && !curTile->getisFlagged() && !board.game_lost && !board.game_won) { //if game tile pressed
-             
+
                     Tile* face = board.boardvec[board.boardvec.size() - 5];
                     Tile* tep = board.boardvec[i];
                     if (tep->getisBomb()) {
@@ -93,20 +93,21 @@ void  CheckIfTilePressed(Board& board, sf::RenderWindow& window, string side, in
                         cout << "GAME LOST" << endl;
                         //board.setLoseBoard();
                         //reveal all tiles
-                       
 
-                    }else {
-                        
+
                     }
-                     tep->setisPressed(true);
-                     tep->checkAdjacency();
-                       
+                    else {
+
+                    }
+                    tep->setisPressed(true);
+                    tep->checkAdjacency();
+
                 }
                 else { //if option button pressed
                     if (curTile->getID() == "debug" && !board.game_lost) {
                         //cout << "Debug Pressed" << curTile->getisPressed() <<endl;
                         curTile->setisPressed(!curTile->getisPressed());
-                       
+
                     }
                     else if (curTile->getID() == "face_happy" || curTile->getID() == "face_lose" || curTile->getID() == "face_win") {
                         //cout << "face" << endl;
@@ -130,18 +131,19 @@ void  CheckIfTilePressed(Board& board, sf::RenderWindow& window, string side, in
                     else if (curTile->getID() == "test_3") {
                         board.test3Pressed();
                         board.initialize(numRows, numCols);
-                    }else{
+                    }
+                    else {
                         //cout << curTile->getID() << endl;
                     }
-                    
-                    
+
+
                 }
             }
             else if (side == "right") {
-                if (curTile->getisGameTile() && !curTile->getisFlagged() && !curTile->getisPressed() && !board.game_lost && !board.game_won) { 
+                if (curTile->getisGameTile() && !curTile->getisFlagged() && !curTile->getisPressed() && !board.game_lost && !board.game_won) {
                     Tile* tep = board.boardvec[i];
                     tep->setisFlagged(true);
-                   
+
                 }
                 else if (curTile->getisGameTile() && curTile->getisFlagged() && !board.game_lost && !board.game_won) {
                     Tile* tep = board.boardvec[i];
@@ -163,13 +165,13 @@ void RerenderBoard(Board& board, sf::RenderWindow window) {
         face->setTexture("face_win"); //WIN
         for (int i = 0; i < board.boardvec.size(); i++) {
             if (board.boardvec[i]->getisBomb() && board.boardvec[i]->getisGameTile()) {
-                    Tile* tep = board.boardvec[i];
-                    tep->setIsOvertileActivated(true);
-                    tep->setisFlagged(true);
-                    tep->setOverTile("flag");
-                    //tep->setIsToptileActivated(true);
-                    //tep->setTopTile("mine");
-                    board.boardvec[i]->Render(window);
+                Tile* tep = board.boardvec[i];
+                tep->setIsOvertileActivated(true);
+                tep->setisFlagged(true);
+                tep->setOverTile("flag");
+                //tep->setIsToptileActivated(true);
+                //tep->setTopTile("mine");
+                board.boardvec[i]->Render(window);
             }
             else {
                 Tile* tep = board.boardvec[i];
@@ -179,8 +181,8 @@ void RerenderBoard(Board& board, sf::RenderWindow window) {
 
             }
 
-            }
-            
+        }
+
     }
     else if (board.game_lost) {
         //cout << "GAME LOST" << endl;
@@ -200,14 +202,15 @@ void RerenderBoard(Board& board, sf::RenderWindow window) {
                     tep->setTopTile("mine");
                     board.boardvec[i]->Render(window);
                 }
-               
+
             }
             else {
 
                 board.boardvec[i]->Render(window);
             }
         }
-    }else {
+    }
+    else {
         if (reveal_mines) {
             for (int i = 0; i < board.boardvec.size(); i++) {
                 if (board.boardvec[i]->getisBomb() && board.boardvec[i]->getisGameTile()) {
@@ -246,7 +249,7 @@ void RerenderBoard(Board& board, sf::RenderWindow window) {
         }
     }
 
-   
+
 
     //set score
 

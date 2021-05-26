@@ -1,6 +1,6 @@
 #include "tile.h"
 
-void Tile::Render(sf::RenderWindow &window) {
+void Tile::Render(sf::RenderWindow& window) {
 	window.draw(this->tile);
 	if (this->getIsOvertileActivated()) {
 		window.draw(this->over_tile);
@@ -8,7 +8,7 @@ void Tile::Render(sf::RenderWindow &window) {
 	if (this->getIsToptileActivated()) {
 		window.draw(this->top_tile);
 	}
-	
+
 }
 
 bool  Tile::getisGameTile() {
@@ -41,20 +41,20 @@ void  Tile::setisBomb(bool isBomb) {
 }
 
 void Tile::setMineTexture() {
-		bool isBomb = this->getIsOvertileActivated();
+	bool isBomb = this->getIsOvertileActivated();
 
-		if (isBomb) {
-			this->setIsOvertileActivated(true);
-			this->setOverTile("mine");
-			this->setTexture("tile_revealed");
+	if (isBomb) {
+		this->setIsOvertileActivated(true);
+		this->setOverTile("mine");
+		this->setTexture("tile_revealed");
 
-		}
-		else {
-			this->setIsOvertileActivated(false);
-			this->setTexture("tile_hidden");
-		}
+	}
+	else {
+		this->setIsOvertileActivated(false);
+		this->setTexture("tile_hidden");
+	}
 
-	
+
 }
 
 void Tile::setisFlagged(bool isFlagged) {
@@ -86,13 +86,14 @@ void Tile::checkAdjacency() {
 	this->setisPressed(true);
 	for (unsigned int i = 0; i < arr.size(); i++) {
 		if (this->calculateAdjacentMines() == 0) {
-			if (!arr[i]->getisBomb() && !arr[i]->getisFlagged() && arr[i]->getisGameTile() && !arr[i]->getisPressed() && arr[i]!=nullptr) {
+			if (!arr[i]->getisBomb() && !arr[i]->getisFlagged() && arr[i]->getisGameTile() && !arr[i]->getisPressed() && arr[i] != nullptr) {
 				arr[i]->setisPressed(true);
 				arr[i]->checkAdjacency();
 			}
-		} else {}
+		}
+		else {}
 	}
-	
+
 
 }
 
@@ -104,7 +105,8 @@ void Tile::setisPressed(bool isPressed) {
 		this->setIsToptileActivated(true);
 		this->setTopTile("mine");
 		this->setTexture("tile_revealed");
-	}else if (!this->getisBomb() && this->getisGameTile()) {
+	}
+	else if (!this->getisBomb() && this->getisGameTile()) {
 		int num_nearby_mines = 0;
 		for (unsigned int i = 0; i < this->adjacent.size(); i++) {
 			if (this->adjacent[i]->getisBomb()) {
